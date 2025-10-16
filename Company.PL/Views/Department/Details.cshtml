@@ -1,0 +1,42 @@
+﻿@model DepartmentDetailsDto
+
+@{
+    ViewData["Title"] = "Department Details";
+}
+
+<div class="container mt-4">
+    <h3 class="text-info mb-4"><i class="fas fa-info-circle me-2"></i>Department Details</h3>
+
+    <div class="card shadow-sm border-0 p-4">
+        <dl class="row">
+            <dt class="col-sm-3">ID</dt>
+            <dd class="col-sm-9">@Model.Id</dd>
+
+            <dt class="col-sm-3">Code</dt>
+            <dd class="col-sm-9">@Model.Code</dd>
+
+            <dt class="col-sm-3">Name</dt>
+            <dd class="col-sm-9">@Model.Name</dd>
+
+            <dt class="col-sm-3">Description</dt>
+            <dd class="col-sm-9">@Model.Description</dd>
+
+            <dt class="col-sm-3">Created By</dt>
+            <dd class="col-sm-9">@Model.CreatedBy</dd>
+
+            <dt class="col-sm-3">Created On</dt>
+            <dd class="col-sm-9">@Model.createdOn.ToString("f")</dd>
+
+            <dt class="col-sm-3">Last Modified By</dt>
+            <dd class="col-sm-9">@Model.LastModifiedBy</dd>
+
+            <dt class="col-sm-3">Last Modified On</dt>
+            <dd class="col-sm-9">@Model.LastModifiedOn.ToString("f")</dd>
+        </dl>
+
+        <div class="mt-4 text-end">
+            <a asp-action="Edit" asp-route-id="@Model.Id" class="btn btn-success me-2"><i class="fas fa-edit me-1"></i> Edit</a>
+            <a asp-action="Index" class="btn btn-secondary"><i class="fas fa-arrow-left me-1"></i> Back</a>
+        </div>
+    </div>
+</div>
