@@ -1,27 +1,34 @@
 ﻿using AutoMapper;
 using Company.DAL.Models.Department;
 using ompany.BLL.Dto_s.Employee;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace ompany.BLL.Commen
 {
-    public class ProjectMapperProfile:Profile
+    public class ProjectMapperProfile : Profile
     {
-        public ProjectMapperProfile() 
+        public ProjectMapperProfile()
         {
-            CreateMap<Employee, EmployeeDto>().ReverseMap();
+            // Employee → EmployeeDto
+            CreateMap<Employee, EmployeeDto>()
+                .ForMember(dest => dest.DepartmentName,
+                           opt => opt.MapFrom(src => src.Department != null ? src.Department.Name : "N/A"))
+                .ReverseMap();
 
-            CreateMap <Employee, EmployeeDetailsDto>().ReverseMap();
+            // Employee → EmployeeDetailsDto
+            CreateMap<Employee, EmployeeDetailsDto>()
+                .ForMember(dest => dest.DepartmentName,
+                           opt => opt.MapFrom(src => src.Department != null ? src.Department.Name : "N/A"))
+                .ReverseMap();
 
+            // CreateEmployeeDto → Employee
             CreateMap<CreateEmployeeDto, Employee>()
-                .ForMember(dest => dest.EmployeeType, options => options.MapFrom(src => src.EmployeeType))
-                 .ForMember(dest => dest.Gender, options => options.MapFrom(src => src.Gender));
+                .ForMember(dest => dest.EmployeeType,
+                           opt => opt.MapFrom(src => src.EmployeeType))
+                .ForMember(dest => dest.Gender,
+                           opt => opt.MapFrom(src => src.Gender));
 
-            CreateMap<UpdateEmployeeDto , Employee>().ReverseMap();
+            // UpdateEmployeeDto ↔ Employee
+            CreateMap<UpdateEmployeeDto, Employee>().ReverseMap();
         }
     }
 }
