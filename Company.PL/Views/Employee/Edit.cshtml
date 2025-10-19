@@ -1,0 +1,63 @@
+﻿@using Company.DAL.Models.shared
+@model EmployeeDetailsDto
+@{
+    ViewData["Title"] = "Edit Employee";
+}
+
+<div class="container mt-4">
+    <h3 class="text-success mb-4"><i class="fas fa-user-edit me-2"></i>Edit Employee</h3>
+
+    <form asp-action="Edit" method="post" class="card shadow-sm p-4">
+        <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+
+        <input type="hidden" asp-for="Id" />
+
+        <div class="row g-3">
+            <div class="col-md-6">
+                <label asp-for="Name" class="form-label"></label>
+                <input asp-for="Name" class="form-control" />
+            </div>
+
+            <div class="col-md-6">
+                <label asp-for="Email" class="form-label"></label>
+                <input asp-for="Email" class="form-control" />
+            </div>
+
+            <div class="col-md-6">
+                <label asp-for="Age" class="form-label"></label>
+                <input asp-for="Age" class="form-control" />
+            </div>
+
+            <div class="col-md-6">
+                <label asp-for="Salary" class="form-label"></label>
+                <input asp-for="Salary" class="form-control" />
+            </div>
+
+            <div class="col-md-6">
+                <label asp-for="EmployeeType" class="form-label"></label>
+                <select asp-for="EmployeeType" class="form-select" asp-items="Html.GetEnumSelectList<EmployeeType>()"></select>
+            </div>
+
+            <div class="col-md-6">
+                <label asp-for="Gender" class="form-label"></label>
+                <select asp-for="Gender" class="form-select">
+                    <option>Male</option>
+                    <option>Female</option>
+                </select>
+            </div>
+
+            <div class="col-md-6">
+                <label asp-for="IsActive" class="form-label"></label>
+                <select asp-for="IsActive" class="form-select">
+                    <option value="true">Active</option>
+                    <option value="false">Inactive</option>
+                </select>
+            </div>
+        </div>
+
+        <div class="mt-4 text-end">
+            <a asp-action="Index" class="btn btn-secondary me-2">Cancel</a>
+            <button type="submit" class="btn btn-success"><i class="fas fa-save me-1"></i> Update</button>
+        </div>
+    </form>
+</div>

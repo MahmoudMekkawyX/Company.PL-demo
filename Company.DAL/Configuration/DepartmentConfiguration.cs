@@ -19,6 +19,10 @@ namespace Company.DAL.Configuration
                    .ValueGeneratedOnAddOrUpdate()
                    .HasComputedColumnSql("GETDATE()", stored: false);
 
+            builder.HasMany(d => d.Employees)
+                .WithOne(e => e.Department)
+                .HasForeignKey(e => e.DepartmentId)
+                .OnDelete(DeleteBehavior.SetNull);
 
 
 

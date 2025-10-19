@@ -2,10 +2,9 @@
 using Company.DAL.Reposatires.DepartmentRepo;
 using ompany.BLL.Dto_s.DepartmentDto_s;
 using ompany.BLL.Factories.DepartmentFactories;
-using ompany.BLL.services;
 
 
-namespace Company.BLL.Services
+namespace ompany.BLL.services.DepartmentServices
 {
     public class DepartmentServices : IDepartmentServices
     {

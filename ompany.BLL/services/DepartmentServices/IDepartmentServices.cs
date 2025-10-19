@@ -5,7 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace ompany.BLL.services
+namespace ompany.BLL.services.DepartmentServices
 {
     public interface IDepartmentServices
     {
