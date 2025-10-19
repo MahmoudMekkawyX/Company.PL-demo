@@ -24,5 +24,6 @@ namespace ompany.BLL.Dto_s.Employee
         public int LastModifiedBy { get; set; }
         public DateTime LastModifiedOn { get; set; }
         public string DepartmentName { get; set; }
+        public int? DepartmentId { get; set; }
     }
 }

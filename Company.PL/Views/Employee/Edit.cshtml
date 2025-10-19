@@ -1,6 +1,10 @@
-﻿@using Company.DAL.Models.shared
+﻿﻿@using Company.DAL.Models.shared
+@using ompany.BLL.services.DepartmentServices
 @model EmployeeDetailsDto
+@inject IDepartmentServices departmentServices
+
 @{
+    var DepartmentSelectList = new SelectList(departmentServices.GetDepartments(), "Id", "Name");
     ViewData["Title"] = "Edit Employee";
 }
 
@@ -53,6 +57,12 @@
                     <option value="false">Inactive</option>
                 </select>
             </div>
+            <div class="col-md-6">
+                <label asp-for="DepartmentId" class="form-label"></label>
+                <select asp-for="DepartmentId" class="form-select" asp-items="DepartmentSelectList"></select>
+                <span asp-validation-for="DepartmentId" class="text-danger"></span>
+            </div>
+
         </div>
 
         <div class="mt-4 text-end">

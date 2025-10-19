@@ -21,6 +21,8 @@ namespace Company.PL
             builder.Services.AddDbContext<ApplicationDbContext>(options =>
             {
                 options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection"));
+                options.UseLazyLoadingProxies();
+
             });
 
             builder.Services.AddScoped<IDepartmentRepositries, DepartmentReposatory>();
