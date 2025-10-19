@@ -10,6 +10,7 @@ namespace Company.DAL.Reposatires.EmployeeRepo
 {
     public interface IEmployeeRepository : IGenericRepository<Employee>
     {
-      // spacific signuture 
+        // spacific signuture 
+        public IEnumerable<Employee> GetAll(string? searchValue);
     }
 }

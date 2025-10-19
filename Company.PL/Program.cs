@@ -2,6 +2,7 @@ using AutoMapper;
 using Company.DAL.Contexts;
 using Company.DAL.Reposatires.DepartmentRepo;
 using Company.DAL.Reposatires.EmployeeRepo;
+using Company.DAL.UOW;
 using Microsoft.EntityFrameworkCore;
 using ompany.BLL.Commen;
 using ompany.BLL.services.DepartmentServices;
@@ -28,6 +29,7 @@ namespace Company.PL
             builder.Services.AddScoped<IDepartmentRepositries, DepartmentReposatory>();
             builder.Services.AddScoped<IDepartmentServices, DepartmentServices>();
             builder.Services.AddScoped<IEmployeeRepository, EmployeeRepositroy>();
+            builder.Services.AddScoped<IUnitOfWork, UnitOfWork>();
             builder.Services.AddScoped<IEmployeeServices, EmployeeServices>();
             builder.Services.AddAutoMapper(M => M.AddMaps(typeof(ProjectMapperProfile).Assembly));
 

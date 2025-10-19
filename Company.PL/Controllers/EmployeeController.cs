@@ -16,11 +16,22 @@ namespace Company.PL.Controllers
             this.logger = logger;
             this.environment = environment;
         }
-        public IActionResult Index()
+        public IActionResult Index(string? searchValue)
         {
-            var Employees = employeeServices.GetEmployees();
-            return View(Employees);
+            IEnumerable<EmployeeDto> employees;
+
+            if (string.IsNullOrWhiteSpace(searchValue))
+            {
+                employees = employeeServices.GetEmployees();
+            }
+            else
+            {
+                employees = employeeServices.GetSearchedEmployees(searchValue);
+            }
+
+            return View(employees);
         }
+
         // GET: Employee/Details/5
         public IActionResult Details(int id)
         {

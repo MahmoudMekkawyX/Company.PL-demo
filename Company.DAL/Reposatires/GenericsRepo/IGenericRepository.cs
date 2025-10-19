@@ -11,8 +11,8 @@ namespace Company.DAL.Reposatires.GenericsRepo
     {
         public IEnumerable<TEntity> GetAll(bool withTrqacking = false);
         public TEntity GetById(int id);
-        public int Add(TEntity item);
-        public int Update(TEntity item);
-        public int Delete(int id);
+        public void Add(TEntity item);
+        public void Update(TEntity item);
+        public void Delete(int id);
     }
 }

@@ -1,5 +1,6 @@
 ﻿using Company.DAL.Models.Department;
 using Company.DAL.Reposatires.DepartmentRepo;
+using Company.DAL.UOW;
 using ompany.BLL.Dto_s.DepartmentDto_s;
 using ompany.BLL.Factories.DepartmentFactories;
 
@@ -8,16 +9,16 @@ namespace ompany.BLL.services.DepartmentServices
 {
     public class DepartmentServices : IDepartmentServices
     {
-        private readonly IDepartmentRepositries _reposatory;
+        private readonly IUnitOfWork _unitOfWork;
 
-        public DepartmentServices(IDepartmentRepositries reposatory)
+        public DepartmentServices(IUnitOfWork unitOfWork)
         {
-            _reposatory = reposatory;
+            _unitOfWork = unitOfWork;
         }
 
         public IEnumerable<DepartmentDto> GetDepartments()
         {
-            var departments = _reposatory.GetAll();
+            var departments = _unitOfWork.Departments.GetAll();
 
             var mappedDepartments = new List<DepartmentDto>();
             foreach (var dept in departments)
@@ -31,7 +32,7 @@ namespace ompany.BLL.services.DepartmentServices
 
         public DepartmentDetailsDto GetDepartmentById(int id)
         {
-            var department = _reposatory.GetById(id);
+            var department = _unitOfWork.Departments.GetById(id);
 
             if (department is null) return null;
 
@@ -42,18 +43,21 @@ namespace ompany.BLL.services.DepartmentServices
         public int AddDepartment(CreateDepartmentDto dto)
         {
             var dept = dto.toDepartment();
-            return _reposatory.Add(dept);
+            _unitOfWork.Departments.Add(dept);
+            return _unitOfWork.Complete();
         }
 
         public int UpdateDepartment(UpdatedDepoartmentDto dto)
         {
             var dept = dto.FromUpdatedDepartment();
-            return _reposatory.Update(dept);
+            _unitOfWork.Departments.Update(dept);
+            return _unitOfWork.Complete();
         }
 
         public int DeleteDepartment(int id)
         {
-            return _reposatory.Delete(id);
+             _unitOfWork.Departments.Delete(id);
+            return _unitOfWork.Complete();
         }
     }
 }

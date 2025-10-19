@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace Company.DAL.Reposatires.EmployeeRepo
 {
-    public class EmployeeRepositroy :GenericRepository<Employee> ,IEmployeeRepository
+    public class EmployeeRepositroy : GenericRepository<Employee>, IEmployeeRepository
     {
         private readonly ApplicationDbContext _context;
         public EmployeeRepositroy(ApplicationDbContext context) : base (context)
@@ -18,6 +18,23 @@ namespace Company.DAL.Reposatires.EmployeeRepo
 
         }
 
+        public IEnumerable<Employee> GetAll(string? searchValue)
+        {
+            if (string.IsNullOrWhiteSpace(searchValue))
+                return GetAll(); 
+
+            searchValue = searchValue.Trim().ToLower();
+
+            var result = _context.Employees
+                .Where(e =>
+                    (e.Name != null && e.Name.ToLower().Contains(searchValue)) ||
+                    (e.Email != null && e.Email.ToLower().Contains(searchValue)) ||
+                    (e.Department != null && e.Department.Name.ToLower().Contains(searchValue))
+                )
+                .ToList();
+
+            return result;
+        }
 
     }
 }

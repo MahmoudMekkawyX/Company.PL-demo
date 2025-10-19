@@ -1,66 +1,68 @@
 ﻿using AutoMapper;
 using Company.DAL.Models.Department;
 using Company.DAL.Reposatires.EmployeeRepo;
+using Company.DAL.UOW;
 using ompany.BLL.Dto_s.Employee;
 using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace ompany.BLL.services.EmployeeServices
 {
     public class EmployeeServices : IEmployeeServices
     {
-        private readonly IEmployeeRepository emplyeeRepository;
+        private readonly IUnitOfWork unitOfWork;
         private readonly IMapper mapper;
 
-        public EmployeeServices(IEmployeeRepository employeeRepository , IMapper mapper) 
+        public EmployeeServices(IUnitOfWork unitOfWork, IMapper mapper)
         {
-            this.emplyeeRepository = employeeRepository;
+            this.unitOfWork = unitOfWork;
             this.mapper = mapper;
-        
         }
+
         public IEnumerable<EmployeeDto> GetEmployees()
         {
-            var Employees = emplyeeRepository.GetAll();
-            var MappedEmployees = mapper.Map<IEnumerable<Employee>, IEnumerable<EmployeeDto>>(Employees);
-            return MappedEmployees;
+            var employees = unitOfWork.Employees.GetAll();
+            return mapper.Map<IEnumerable<Employee>, IEnumerable<EmployeeDto>>(employees);
         }
+
         public EmployeeDetailsDto GetEmployeeById(int id)
         {
-           var Employee = emplyeeRepository.GetById(id);
-            var MappedEmployee = mapper.Map<Employee, EmployeeDetailsDto>(Employee);
-            return MappedEmployee;
+            var employee = unitOfWork.Employees.GetById(id);
+            return mapper.Map<Employee, EmployeeDetailsDto>(employee);
         }
 
         public int CreateEmployee(CreateEmployeeDto dto)
         {
-            var Emp = mapper.Map<CreateEmployeeDto, Employee>(dto);
-            Emp.CreatedBy = 1;
-            Emp.createdOn = DateTime.Now;
-            Emp.LastModifiedBy = 1;
-            Emp.LastModifiedOn= DateTime.Now;
+            var emp = mapper.Map<CreateEmployeeDto, Employee>(dto);
+            emp.CreatedBy = 1;
+            emp.createdOn = DateTime.Now;
+            emp.LastModifiedBy = 1;
+            emp.LastModifiedOn = DateTime.Now;
 
-            return emplyeeRepository.Add(Emp);
-
+            unitOfWork.Employees.Add(emp);
+            return unitOfWork.Complete();
         }
 
         public int UpdateEmployee(UpdateEmployeeDto dto)
         {
-            var Emp = mapper.Map<UpdateEmployeeDto, Employee>(dto);
-            Emp.LastModifiedBy = 1;
-            Emp.LastModifiedOn = DateTime.Now;
-            return emplyeeRepository.Update(Emp);
+            var emp = mapper.Map<UpdateEmployeeDto, Employee>(dto);
+            emp.LastModifiedBy = 1;
+            emp.LastModifiedOn = DateTime.Now;
 
+            unitOfWork.Employees.Update(emp);
+            return unitOfWork.Complete();
         }
+
         public int DeleteEmployee(int id)
         {
-            return emplyeeRepository.Delete(id);
+            unitOfWork.Employees.Delete(id);
+            return unitOfWork.Complete();
         }
 
-      
-
-      
+        public IEnumerable<EmployeeDto> GetSearchedEmployees(string? searchValue)
+        {
+            var employees = unitOfWork.Employees.GetAll(searchValue);
+            return mapper.Map<IEnumerable<Employee>, IEnumerable<EmployeeDto>>(employees);
+        }
     }
 }

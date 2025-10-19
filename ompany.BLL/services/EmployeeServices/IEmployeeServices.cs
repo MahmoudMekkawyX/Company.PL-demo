@@ -11,6 +11,7 @@ namespace ompany.BLL.services.EmployeeServices
     public interface IEmployeeServices
     {
         IEnumerable<EmployeeDto> GetEmployees();
+        public IEnumerable<EmployeeDto> GetSearchedEmployees(string? searchValue);
         EmployeeDetailsDto GetEmployeeById(int id);
         int CreateEmployee(CreateEmployeeDto dto);
         int UpdateEmployee(UpdateEmployeeDto dto);
