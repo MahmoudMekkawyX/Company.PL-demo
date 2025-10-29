@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 using ompany.BLL.Dto_s.DepartmentDto_s;
 using ompany.BLL.Dto_s.Employee;
 using ompany.BLL.services.DepartmentServices;
@@ -6,6 +7,7 @@ using ompany.BLL.services.EmployeeServices;
 
 namespace Company.PL.Controllers
 {
+    [Authorize]
     public class DepartmentController : Controller
     {
         private readonly IDepartmentServices departmentServices;

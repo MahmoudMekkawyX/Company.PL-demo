@@ -1,0 +1,45 @@
+﻿@using Company.PL.ViewModel
+@model RegisterViewModel
+@{
+    ViewData["Title"] = "Register";
+    Layout = "~/Views/Shared/_Authlayout.cshtml";
+}
+
+<div class="main-agileinfo">
+    <div class="agileits-top">
+        <!-- Modern HTML structure for Register Page -->
+        <!-- Modern HTML structure for Register Page -->
+        <div class="container">
+            <h1>Create Your Account</h1>
+            <form asp-action="Register" method="post" asp-controller="Account" class="form">
+                <input asp-for="FirstName" class="input-field" placeholder="First Name" required>
+                <span asp-validation-for="FirstName"></span>
+                <input asp-for="LastName" class="input-field" placeholder="Last Name" required>
+                <span asp-validation-for="LastName"></span>
+                <input asp-for="UserName" class="input-field" placeholder="Username" required>
+                <span asp-validation-for="UserName"></span>
+                <input asp-for="Email" class="input-field" placeholder="Email" type="email" required>
+                <span asp-validation-for="Email"></span>
+                <input asp-for="Password" class="input-field" placeholder="Password" type="password" required>
+                <span asp-validation-for="Password"></span>
+                <input asp-for="ConfirmPassword" class="input-field" placeholder="Confirm Password" type="password" required>
+                <span asp-validation-for="ConfirmPassword"></span>
+                <label class="checkbox-label">
+                    <input asp-for="IsAgree" class="checkbox" required>
+                    <span>I Agree to the Terms & Conditions</span>
+                </label>
+                <button type="submit" class="submit-btn">Create Account</button>
+                <p class="login-link">Already have an account? <a asp-action="Login">Login here</a></p>
+            </form>
+        </div>
+
+        
+
+    </div>
+</div>
+
+@section Validation {
+    <script src="~/lib/jquery-validation/dist/jquery.validate.min.js"></script>
+    <script src="~/lib/jquery-validation-unobtrusive/jquery.validate.unobtrusive.min.js"></script>
+}
+
