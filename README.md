@@ -34,6 +34,5 @@ This design ensures **separation of concerns**, making the application easier to
 - Enhance UI with modern front-end frameworks.  
 - Extend services for advanced business logic.
 
-- 
 ## 👨‍💻 Author  
 Developed by **Mahmoud Essam Mekkawy**  
