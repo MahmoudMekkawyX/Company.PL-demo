@@ -1,8 +1,9 @@
-﻿@{
-    ViewData["Title"] = "Home Page";
+@{
+    ViewData["Title"] = "Home";
 }
-
-<div class="text-center">
-    <h1 class="display-4">Welcome</h1>
-    <p>Learn about <a href="https://learn.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
+<div class="py-5 text-center">
+    <h1 class="display-5">Company Management</h1>
+    <p class="lead">ASP.NET Core MVC with a PL / BLL / DAL (N-Tier) structure. Repository + Unit of Work, DTOs, AutoMapper, EF Core and ASP.NET Core Identity login.</p>
+    <a class="btn btn-primary me-2" asp-controller="Department" asp-action="Index">Departments</a>
+    <a class="btn btn-outline-primary" asp-controller="Employee" asp-action="Index">Employees</a>
 </div>
