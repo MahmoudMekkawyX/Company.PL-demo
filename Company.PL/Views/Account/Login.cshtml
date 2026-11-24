@@ -1,4 +1,4 @@
-﻿@using Company.PL.ViewModel
+@using Company.PL.ViewModel
 @model LoginViewModel
 @{
     ViewData["Title"] = "Login";
@@ -10,6 +10,7 @@
         <!-- Login Page Only -->
         <div class="container login-container">
             <h1>Sign In</h1>
+            <p class="small">Demo account: demo@example.com / Demo@123 (or register your own)</p>
             <form asp-action="Login" method="post" class="form">
                 <div class="input-group">
                     <span class="icon">&#128100;</span>
