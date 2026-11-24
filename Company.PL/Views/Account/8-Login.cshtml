@@ -1,0 +1,43 @@
+@using Company.PL.ViewModel
+@model LoginViewModel
+@{
+    ViewData["Title"] = "Login";
+    Layout = "~/Views/Shared/_AuthLayout.cshtml";
+}
+
+<div class="main-agileinfo">
+    <div class="agileits-top">
+        <!-- Login Page Only -->
+        <div class="container login-container">
+            <h1>Sign In</h1>
+            <p class="small">Demo account: demo@example.com / Demo@123 (or register your own)</p>
+            <form asp-action="Login" method="post" class="form">
+                <div class="input-group">
+                    <span class="icon">&#128100;</span>
+                    <input asp-for="Email" class="input-field" placeholder="Email Address" type="email" required>
+                </div>
+                <span asp-validation-for="Email"></span>
+
+                <div class="input-group">
+                    <span class="icon">&#128274;</span>
+                    <input asp-for="Password" class="input-field" placeholder="Password" type="password" required>
+                </div>
+                <span asp-validation-for="Password"></span>
+
+                <label class="checkbox-label">
+                    <input asp-for="RememberMe" class="checkbox">
+                    <span>Keep Me Signed In</span>
+                </label>
+
+                <button type="submit" class="submit-btn">Login</button>
+                <p class="login-link">Don't have an account? <a asp-action="Register">Register here</a></p>
+            </form>
+        </div>
+       
+    </div>
+</div>
+
+@section Validation {
+    <script src="~/lib/jquery-validation/dist/jquery.validate.min.js"></script>
+    <script src="~/lib/jquery-validation-unobtrusive/jquery.validate.unobtrusive.min.js"></script>
+}
