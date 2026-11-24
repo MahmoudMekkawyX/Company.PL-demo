@@ -24,7 +24,7 @@ namespace Company.PL
             // Add DbContext
             builder.Services.AddDbContext<ApplicationDbContext>(options =>
             {
-                options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection"));
+                options.UseSqlite(builder.Configuration.GetConnectionString("DefaultConnection") ?? "Data Source=demo.db");
                 options.UseLazyLoadingProxies();
             });
 
@@ -58,6 +58,13 @@ namespace Company.PL
             });
 
             var app = builder.Build();
+
+            using (var scope = app.Services.CreateScope())
+            {
+                var db = scope.ServiceProvider.GetRequiredService<ApplicationDbContext>();
+                db.Database.EnsureCreated();
+                DemoSeed.Seed(db, scope.ServiceProvider.GetRequiredService<UserManager<ApplicatiionUser>>());
+            }
 
             // Use Static Files
             app.UseStaticFiles();
